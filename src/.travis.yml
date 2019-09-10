@@ -1,10 +1,27 @@
-language: node_js 
+language: node_js
+node_js:
+  - 8
+cache:
+  directories:
+    - node_modules
 sudo: required
 services:
   - docker
 install:
   - bundle install
 before_install:
-  - docker build -t joydesigner/docker-react -f Dockerfile.dev .
+  - docker build -t USERNAME/docker-react -f Dockerfile.dev .
 script:
-  - docker run -e CI=true joydesigner/docker-react npm run test
+  - docker run -e CI=true USERNAME/docker-react npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-test"
+  env: "DockerTest-env"
+  bucket_name: "elasticbeanstalk-us-east-2-667001150618"
+  bucket_path: "docker-test"
+  on:
+    branch: master
+access_key_id:
+  secure: $AWS_ACCESS_KEY
+  
