@@ -1,3 +1,4 @@
+
 sudo: required
 services:
   - docker
@@ -5,4 +6,4 @@ before_install:
   - docker build -t joydesigner/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run joydesigner/docker-react npm run test -- --coverage
+  - docker run -e CI=true joydesigner/docker-react npm run test
