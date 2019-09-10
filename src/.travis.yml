@@ -2,8 +2,9 @@ language: generic
 sudo: required
 services:
   - docker
+install:
+  - bundle install
 before_install:
   - docker build -t joydesigner/docker-react -f Dockerfile.dev .
-
 script:
   - docker run -e CI=true joydesigner/docker-react npm run test
