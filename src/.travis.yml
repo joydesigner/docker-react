@@ -1,13 +1,11 @@
-language: ruby
+language: node_js
+node_js:
+  - 7
 sudo: required
 services:
   - docker
-install:
-  - gem uninstall bundler
-  - gem install bundler --version '1.7.4'
 before_install:
   - docker build -t joydesigner/docker-react -f Dockerfile.dev .
 
 script:
-  "rake"
   - docker run -e CI=true joydesigner/docker-react npm run test
