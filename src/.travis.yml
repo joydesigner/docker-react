@@ -1,6 +1,3 @@
-language: node_js
-node_js:
-  - 7
 sudo: required
 services:
   - docker
@@ -8,4 +5,4 @@ before_install:
   - docker build -t joydesigner/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true joydesigner/docker-react npm run test
+  - docker run joydesigner/docker-react npm run test -- --coverage
