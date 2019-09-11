@@ -5,10 +5,11 @@ services:
 install:
   - bundle install
 before_install:
-  gem install bundler
+  - nvm install
+  - gem install bundler
   - docker build -t USERNAME/docker-react -f Dockerfile.dev .
 script:
-  'bundle exec rake spec'
+  - 'bundle exec rake spec'
   - docker run -e CI=true USERNAME/docker-react npm run test
 deploy:
   provider: elasticbeanstalk
